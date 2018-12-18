@@ -8,7 +8,7 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import Login from './pages/Login';
+import Contact from './pages/Contact';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -21,7 +21,8 @@ type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-     <Login />
+      <Login />
+      // <Contact />
     );
   }
 }
