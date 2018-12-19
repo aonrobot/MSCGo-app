@@ -7,9 +7,10 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, TouchableOpacity, SafeAreaView} from 'react-native';
+import {Platform, StyleSheet, View, ImageBackground, SafeAreaView, Image} from 'react-native';
+import { Container, Header, Button, Content, ActionSheet, Text, Icon} from "native-base";
 
-
+// var Button = [ {Text: "Phone Book"}];
 
 
 
@@ -20,47 +21,28 @@ export default class Index extends Component {
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       
-
+      <ImageBackground source={require('../asset/bg1.png')} style={ { flex: 1, width: null, height: null } }>
           <View style={styles.box1}>  
-          <Text style={styles.welcome}>Hello Suthiporn dok</Text>
+          <Image source={require('../asset/Avartar.png')} style={{width: 60,height: 60, marginLeft: -275, marginTop: 0, borderWidth: 1,borderRadius:30}}/>
+          <Text style={{fontSize: 20, marginTop: -50}}>Hello Suthiporn</Text>
+          <Text style={{fontSize: 20, marginTop: 0}}>Description</Text>
           </View>
 
           <View style={styles.container}> 
 
-            {/* <View style={styles.box1}>  
-            <Text style={styles.welcome}>Hello Suthiporn dok</Text>
-            </View> */}
-          
-            {/* <View style={[{ width: 160, height: 150, marginLeft: 20, marginTop: 20, backgroundColor: "rgb(255,108,224)", justifyContent: 'center'}]}> */}
-            <View style={styles.Btn01}>
-              <Button
-                onPress={handlePress}
-                title="Phone Book"
-
-                color="white"
-                accessibilityLabel="Learn more about this purple button"
-
-                style={styles.Btn01}
-
-              />
-            </View>
-
-            {/* <View style={[{ width: 160, height: 150, marginLeft: 200, marginTop: -150, backgroundColor: "rgb(255,193,108)", justifyContent: 'center'}]}> */}
-            <View style={styles.Btn02}>
-              <Button
-                onPress={handlePress}
-                title="Portals"
-
-                color="white"
-                accessibilityLabel="Learn more about this purple button"
-
-                style={styles.Btn02}
-
-              />
-            </View>
+            
+              <Button style={styles.Btn01}>
+                  <Image source={require('../asset/PhoneBook.png')} style={{width: 75,height: 75, marginLeft: 25, marginTop: -30}}/>
+                  <Text style={{marginTop: 80, marginLeft: -100}}>Phone Book</Text>
+              </Button>
 
 
-            <View style={styles.Btn03}>
+              <Button style={styles.Btn02}>
+                <Text>WorkFlow</Text>
+              </Button>
+
+
+            
               <Button
                 onPress={handlePress}
                 title="DmasApps"
@@ -71,9 +53,10 @@ export default class Index extends Component {
                 style={styles.Btn03}
 
               />
-            </View>
+         
 
           </View>
+          </ImageBackground>
       </SafeAreaView>
     );
      
@@ -86,22 +69,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "row",
-    backgroundColor: "rgb(0,0,0)",
+    // backgroundColor: "rgb(0,0,0)",
+    
     // marginTop: 60,
     paddingRight: 2,
     paddingLeft: 2,
-    paddingTop: 4
+    paddingTop: 2
   },
   welcome: {
     fontSize: 20,
-    textAlign: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    // margin: 0,
+    marginLeft: 220,
     
     
     //backgroundColor: '#F5FCFF',
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255,255,255,0.2)',
     marginTop: 20,
     width: "100%"
   
@@ -110,10 +91,9 @@ const styles = StyleSheet.create({
 
   Btn01: {
     backgroundColor: "rgba(255,255,255,.2)",
-    // borderRadius: 25,
-    flex: 1,
-            width: 160,
-            height: 150,
+    // flex: 1,
+            width: '33.33%',
+            height: 120,
             justifyContent: 'center',
             margin: 2
 
@@ -122,12 +102,10 @@ const styles = StyleSheet.create({
 
   Btn02: {
     backgroundColor: "rgba(255,255,255,.2)",
-    // borderRadius: 25,
-    flex: 1,
+    // flex: 1,
             width: 160,
-            height: 150,
-            // marginLeft: 200,
-            // marginTop: -150,
+            height: 120,
+            display: 'none',
             justifyContent: 'center',
           margin: 2
 
@@ -135,12 +113,10 @@ const styles = StyleSheet.create({
 
   Btn03: {
     backgroundColor: "rgba(255,255,255,.2)",
-    // borderRadius: 25,
-    flex: 1,
+    // flex: 1,
             width: 160,
-            height: 150,
-            // marginLeft: 200,
-            // marginTop: -150,
+            height: 120,
+            display: 'none',
             justifyContent: 'center',
             margin: 2
 
@@ -150,8 +126,9 @@ const styles = StyleSheet.create({
   box1: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 60,
+    height: 80,
     backgroundColor: 'white',
+    borderWidth: 1,
   }
   /*Header: {
     leftComponent={ icon: 'menu', color: '#fff' },
