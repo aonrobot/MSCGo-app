@@ -8,6 +8,7 @@ export default class Contact extends Component {
         
         this.state = {
             empData : [],
+            token: ''
         };
     }
 
@@ -25,29 +26,45 @@ export default class Contact extends Component {
         }
 
         getUserToken().then((token) => {
-        // TODO Change Page 
-        Alert.alert(token);
+        
             if (token === 'NoData'){ 
 
                 this.props.navigation.navigate('Login');
+            }else {
+                let data = JSON.parse(token);
+                this.setState({
+                    token: data.token
+                });
+                this.getEmp();
+
             }
 
         })  
 
-        fetch('http://mis_test.metrosystems.co.th/mscgoapp/api/employees')
+    }
+
+    getEmp() {
+
+        fetch('http://mis_test.metrosystems.co.th/mscgoapp/api/employees',{
+            method: 'GET' , 
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.state.token,
+            }
+        })
         .then((response) => response.json())
         .then((responseJson) => {
-            // this.setState({
-            //     empData : responseJson
-            // });
+            this.setState({
+                empData : responseJson
+            });
         })
         .catch((error) => {
-            Alert.alert(JSON.stringify(error));
             console.error(error);
         });
     }
 
-    onSearchChange(text){ meeauon
+    onSearchChange(text){ 
         // fetch('http://mis_test.metrosystems.co.th/mscgoapp/api/employees/search')
         // .then((response) => response.json())
         // .then((responseJson) => {

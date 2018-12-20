@@ -17,6 +17,13 @@ import { Container, Header, Button, Content, ActionSheet, Text, Icon} from "nati
 //type Props = {};
 export default class Index extends Component {
 
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            userInfo : {},
+        };
+    }
 
   componentWillMount() {
 
@@ -37,6 +44,12 @@ export default class Index extends Component {
       if (token === 'NoData'){ 
 
         this.props.navigation.navigate('Login');
+      }else {
+
+        let userInfo = JSON.parse(token);
+        this.setState({
+          userInfo: userInfo.userInfo
+        })
       }
 
     })  
@@ -49,10 +62,10 @@ export default class Index extends Component {
       
       <ImageBackground source={require('../asset/bg2.png')} style={ { flex: 1, width: null, height: null } }>
           <View style={styles.box1}>  
-          <Image source={require('../asset/Avartar.png')} style={{width: 60,height: 60, marginLeft: -275, marginTop: 30, borderRadius:30}}/>
+          <Image source={{uri: this.state.userInfo.imgPath }} style={{width: 60,height: 60, marginLeft: -275, marginTop: 30, borderRadius:30}}/>
             <View style={{height: 60, width: '50%'}}>          
-              <Text style={{fontSize: 20, marginTop: -35}}>Hello Suthiporn</Text>
-              <Text style={{fontSize: 15, marginTop: 0}}>Description</Text>
+              <Text style={{fontSize: 20, marginTop: -35}}> {this.state.userInfo.FirstName} {this.state.userInfo.LastName}  </Text>
+              <Text style={{fontSize: 15, marginTop: 0}}> { this.state.userInfo.PositionNameEng } </Text>
             </View>
           </View>
 
