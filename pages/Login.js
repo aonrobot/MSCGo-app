@@ -77,7 +77,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <ImageBackground source={require('../asset/bg1.png')} style={ { flex: 1, width: null, height: null } }>
+      <ImageBackground source={require('../asset/bg2.png')} style={ { flex: 1, width: null, height: null } }>
         <View style={styles.container}>
           <Image style={styles.imageIcon}
             source={require('../asset/msc1.png')}
