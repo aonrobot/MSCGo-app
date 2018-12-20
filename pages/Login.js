@@ -74,7 +74,7 @@ export default class Login extends Component {
 
             getUserToken().then((token) => {
               // TODO Change Page 
-              this.props.navigation.navigate('Login');
+              this.props.navigation.navigate('Home');
         
             })  
 

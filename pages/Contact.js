@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import { View, StyleSheet, Alert,AsyncStorage } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title ,Input ,Item ,  Content, List, ListItem, Thumbnail, Text, rounded ,Spinner} from 'native-base';
 export default class Contact extends Component {
 
@@ -12,10 +12,31 @@ export default class Contact extends Component {
     }
 
     componentWillMount() {
+
+        const getUserToken = async () => {
+        
+            let userId = '';
+            try {
+                userId = await AsyncStorage.getItem('UserInfo') || 'NoData';
+            } catch (error) {
+                console.log(error.message);
+            }
+            return userId;
+        }
+
+        getUserToken().then((token) => {
+        // TODO Change Page 
+        Alert.alert(token);
+            if (token === 'NoData'){ 
+
+                this.props.navigation.navigate('Login');
+            }
+
+        })  
+
         fetch('http://mis_test.metrosystems.co.th/mscgoapp/api/employees')
         .then((response) => response.json())
         .then((responseJson) => {
-        Alert.alert(JSON.stringify(responseJson));
             // this.setState({
             //     empData : responseJson
             // });
@@ -37,7 +58,6 @@ export default class Contact extends Component {
         // .catch((error) => {
         //     console.error(error);
         // });
-        Alert.alert("Value from event:",text)
     }
 
 

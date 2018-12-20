@@ -34,7 +34,7 @@ export default class Index extends Component {
     getUserToken().then((token) => {
       // TODO Change Page 
 
-      if (token !== 'NoData'){ 
+      if (token === 'NoData'){ 
 
         this.props.navigation.navigate('Login');
       }
@@ -59,7 +59,7 @@ export default class Index extends Component {
           <View style={styles.container}> 
 
             
-              <Button style={styles.Btn01}>
+              <Button style={styles.Btn01} onPress={() => {  this.props.navigation.navigate('Contact'); }}>
                   <Image source={require('../asset/PhoneBook.png')} style={{width: 75,height: 75, marginLeft: '20%', marginTop: -30}}/>
                   <Text style={{marginTop: 80, marginLeft: -100}}>Phone Book</Text>
               </Button>

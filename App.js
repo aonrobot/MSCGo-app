@@ -11,6 +11,7 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import LoginScreen from './pages/Login';
 import HomeScreen from './pages/Index';
+import ContactScreen from './pages/Contact';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -31,6 +32,7 @@ export default class App extends Component {
 const AppStackNavigator = createStackNavigator({
     Home: HomeScreen,
     Login : LoginScreen,
+    Contact : ContactScreen,
   },{
     headerMode: 'none'
   }
