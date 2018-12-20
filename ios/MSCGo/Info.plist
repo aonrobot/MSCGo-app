@@ -69,6 +69,13 @@
 		<string>rubicon-icon-font.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+<<<<<<< HEAD
+=======
+		<string>AntDesign.ttf</string>
+		<string>FontAwesome5_Brands.ttf</string>
+		<string>FontAwesome5_Regular.ttf</string>
+		<string>FontAwesome5_Solid.ttf</string>
+>>>>>>> 43d1e4c3adf20801ae067e0fd6b3ea97e42b06a8
 	</array>
 </dict>
 </plist>
