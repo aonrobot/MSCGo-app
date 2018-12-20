@@ -34,7 +34,7 @@ export default class Index extends Component {
 
             
               <Button style={styles.Btn01}>
-                  <Image source={require('../asset/PhoneBook.png')} style={{width: 75,height: 75, marginLeft: 25, marginTop: -30}}/>
+                  <Image source={require('../asset/PhoneBook.png')} style={{width: 75,height: 75, marginLeft: '20%', marginTop: -30}}/>
                   <Text style={{marginTop: 80, marginLeft: -100}}>Phone Book</Text>
               </Button>
 
