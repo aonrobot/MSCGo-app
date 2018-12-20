@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Alert,  TextInput, View, StyleSheet, ImageBackground, Image } from 'react-native';
+import { Alert,  TextInput, View, StyleSheet, ImageBackground, Image, AsyncStorage  } from 'react-native';
 import { Container, Header, Content, Button, Text } from 'native-base';
-
-
 
 export default class Login extends Component {
   constructor(props) {
@@ -45,20 +43,40 @@ export default class Login extends Component {
     }
     else {
       fetch('http://mis_test.metrosystems.co.th/mscgoapp/api/login', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          login: username,
-          password:  password,
-        }),
-      })
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            login: username,
+            password:  password,
+          }),
+        })
         .then((response) => response.json())
         .then((responseJson) => {
-          Alert.alert(JSON.stringify(responseJson));
+
           if (responseJson.result) {
+
+            AsyncStorage.setItem('UserInfo', JSON.stringify(responseJson.data));
+
+            const getUserToken = async () => {
+
+              let userId = '';
+
+              try {
+                userId = await AsyncStorage.getItem('UserInfo') || 'NoData';
+              } catch (error) {
+                console.log(error.message);
+              }
+              return userId;
+            }
+
+            getUserToken().then((token) => {
+              // TODO Change Page 
+        
+            })  
+
           }else {
             this.setState({
               alertMessage: 'Username หรือ Password ผิด'
@@ -111,6 +129,7 @@ export default class Login extends Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
