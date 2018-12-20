@@ -21,11 +21,13 @@ export default class Index extends Component {
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       
-      <ImageBackground source={require('../asset/bg1.png')} style={ { flex: 1, width: null, height: null } }>
+      <ImageBackground source={require('../asset/bg2.png')} style={ { flex: 1, width: null, height: null } }>
           <View style={styles.box1}>  
-          <Image source={require('../asset/Avartar.png')} style={{width: 60,height: 60, marginLeft: -275, marginTop: 0, borderWidth: 1,borderRadius:30}}/>
-          <Text style={{fontSize: 20, marginTop: -50}}>Hello Suthiporn</Text>
-          <Text style={{fontSize: 20, marginTop: 0}}>Description</Text>
+          <Image source={require('../asset/Avartar.png')} style={{width: 60,height: 60, marginLeft: -275, marginTop: 30, borderRadius:30}}/>
+            <View style={{height: 60, width: '50%'}}>          
+              <Text style={{fontSize: 20, marginTop: -35}}>Hello Suthiporn</Text>
+              <Text style={{fontSize: 15, marginTop: 0}}>Description</Text>
+            </View>
           </View>
 
           <View style={styles.container}> 
@@ -92,10 +94,10 @@ const styles = StyleSheet.create({
   Btn01: {
     backgroundColor: "rgba(255,255,255,.2)",
     // flex: 1,
-            width: '33.33%',
+            width: '32.50%',
             height: 120,
             justifyContent: 'center',
-            margin: 2
+            margin: ".50%"
 
 
   },
@@ -103,22 +105,22 @@ const styles = StyleSheet.create({
   Btn02: {
     backgroundColor: "rgba(255,255,255,.2)",
     // flex: 1,
-            width: 160,
+            width: '32.50%',
             height: 120,
-            display: 'none',
+            // display: 'none',
             justifyContent: 'center',
-          margin: 2
+          margin: ".50%"
 
   },
 
   Btn03: {
     backgroundColor: "rgba(255,255,255,.2)",
     // flex: 1,
-            width: 160,
+            width: '32.50%',
             height: 120,
-            display: 'none',
+            // display: 'none',
             justifyContent: 'center',
-            margin: 2
+            margin: ".50%"
 
   },
 
@@ -126,9 +128,10 @@ const styles = StyleSheet.create({
   box1: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 80,
-    backgroundColor: 'white',
-    borderWidth: 1,
+    height: 60,
+    backgroundColor: 'rgba(255,255,255,1)',
+    marginTop: 20,
+    // borderWidth: 1,
   }
   /*Header: {
     leftComponent={ icon: 'menu', color: '#fff' },
