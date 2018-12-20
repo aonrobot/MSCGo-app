@@ -8,7 +8,9 @@ export default class Contact extends Component {
         
         this.state = {
             empData : [],
-            token: ''
+            empDataTemp : [],
+            token: '',
+            loading: false,
         };
     }
 
@@ -44,6 +46,9 @@ export default class Contact extends Component {
     }
 
     getEmp() {
+        this.setState({
+            loading : false
+        });
 
         fetch('http://mis_test.metrosystems.co.th/mscgoapp/api/employees',{
             method: 'GET' , 
@@ -56,7 +61,9 @@ export default class Contact extends Component {
         .then((response) => response.json())
         .then((responseJson) => {
             this.setState({
-                empData : responseJson
+                empData : responseJson,
+                empDataTemp : responseJson,
+                loading : true
             });
         })
         .catch((error) => {
@@ -65,53 +72,72 @@ export default class Contact extends Component {
     }
 
     onSearchChange(text){ 
-        // fetch('http://mis_test.metrosystems.co.th/mscgoapp/api/employees/search')
-        // .then((response) => response.json())
-        // .then((responseJson) => {
-        //     this.setState({
-        //         empData : responseJson
-        //     });
-        // })
-        // .catch((error) => {
-        //     console.error(error);
-        // });
+        this.setState({
+            loading : false
+        });
+        fetch('http://mis_test.metrosystems.co.th/mscgoapp/api/employees/search?q='+text,{
+            method: 'GET' , 
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.state.token,
+            }
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            this.setState({
+                empData : responseJson,
+                loading : true
+            });
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     }
 
+    listEmployee(empData) {
+        return (empData.length === 0) ?  
+            <ListItem thumbnail style={styles.listitem}>
+                <Body>
+                    <Text note numberOfLines={1}>No Result</Text>
+                </Body>
+            </ListItem>
+        :
+            <List >
+                {   
+                    empData.map(item => {
+                        return ( 
+                            <ListItem thumbnail style={styles.listitem}>
+                            <Left>
+                                <Thumbnail  style={styles.imgbox} source={{ uri: item.imgPath }} />
+                            </Left>
+                            <Body>
+                                <Text>
+                                {
+                                    (item.NickName != "") ?
+                                    "("+item.NickName+") ": ""
+                                }
+                                {item.FullName}
+                                </Text>
+                                <Text>{item.email}</Text>
+                                <Text note numberOfLines={1}> { item.Phone3 }  </Text>
+                                
+                            </Body>
+                            </ListItem>
+                        )
+                    })
+                }
+            </List> 
+    }
 
     render() {
-
-        var items = [
-            'Simon Mignolet',
-            'Nathaniel Clyne',
-            'Dejan Lovren',
-            'Mama Sakho',
-            'Emre Can',
-            'Nathaniel Clyne',
-            'Dejan Lovren',
-            'Mama Sakho',
-            'Nathaniel Clyne',
-            'Dejan Lovren',
-            'Mama Sakho',
-            'Nathaniel Clyne',
-            'Dejan Lovren',
-            'Mama Sakho',
-            'Nathaniel Clyne',
-            'Dejan Lovren',
-            'Mama Sakho',
-            'Nathaniel Clyne',
-            'Dejan Lovren',
-            'Mama Sakho',
-            'Nathaniel Clyne',
-            'Dejan Lovren',
-            'Mama Sakho',
-        ];
 
         return (
 
         <Container>
             <Header  style={styles.header}>
                 <Left>
-                    <Button transparent>
+                    <Button transparent onPress={() => {  this.props.navigation.navigate('Home'); }}>
                     <Icon name='arrow-back' style={styles.backbtn} />
                     </Button>
                 </Left>
@@ -124,7 +150,6 @@ export default class Contact extends Component {
                     </Button>
                 </Right>
             </Header>
-
             <Content>
                 <View style={[styles.searchbox]}>
                     <Item rounded style={{ height: 35 }}>
@@ -134,28 +159,20 @@ export default class Contact extends Component {
                         placeholder="Search" style={{ fontSize:14}} />
                     </Item>
                 </View>
-                <View style={[styles.loader]}>
-                    <Spinner color='blue' />
-                </View>
-                <List >
-                    {
-                        this.state.empData.map(item => {
-                            return ( 
-                                <ListItem thumbnail style={styles.listitem}>
-                                <Left>
-                                    <Thumbnail  style={styles.imgbox} source={{ uri: item.imgPath }} />
-                                </Left>
-                                <Body>
-                                    <Text>{item.FullName}</Text>
-                                    
-                                    <Text note numberOfLines={1}> { item.Phone3 }  </Text>
-                                    
-                                </Body>
-                                </ListItem>
-                            )
-                        })
-                    }
-                </List> 
+
+            {
+
+                (this.state.loading == false) ?
+                    
+                    <View style={[styles.loader]}>
+                        <Spinner color='blue' />
+                    </View>
+                :
+
+                this.listEmployee(this.state.empData)
+
+            }
+
             </Content>
         </Container>
         ); 
@@ -178,7 +195,12 @@ const styles = StyleSheet.create({
         color: '#000000', 
         fontSize: 28, 
         fontWeight: 'bold',
-        marginLeft: -22,
+        marginLeft: 0,
+        // marginLeft: -22,
+
+        // flex:1,
+        // alignItems: 'center',
+        // justifyContent: 'center',
     },
 
     searchbox: {
