@@ -8,8 +8,9 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import Login from './pages/Login';
-import Index from './pages/Index';
+import { createStackNavigator, createAppContainer } from "react-navigation";
+import LoginScreen from './pages/Login';
+import HomeScreen from './pages/Index';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -22,11 +23,20 @@ const instructions = Platform.select({
 export default class App extends Component {
   render() {
     return (
-        <Index />
-        // <Login />/
+        <AppContainer />
     );
   }
 }
+
+const AppStackNavigator = createStackNavigator({
+    Home: HomeScreen,
+    Login : LoginScreen,
+  },{
+    headerMode: 'none'
+  }
+);
+
+const AppContainer = createAppContainer(AppStackNavigator);
 
 const styles = StyleSheet.create({
   container: {
