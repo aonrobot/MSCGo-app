@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, View, ImageBackground, SafeAreaView, Image} from 'react-native';
+import { Alert, Platform, StyleSheet, View, ImageBackground, SafeAreaView, Image, AsyncStorage} from 'react-native';
 import { Container, Header, Button, Content, ActionSheet, Text, Icon} from "native-base";
 
 // var Button = [ {Text: "Phone Book"}];
@@ -16,6 +16,32 @@ import { Container, Header, Button, Content, ActionSheet, Text, Icon} from "nati
 
 //type Props = {};
 export default class Index extends Component {
+
+
+  componentWillMount() {
+
+    const getUserToken = async () => {
+      
+      let userId = '';
+      try {
+        userId = await AsyncStorage.getItem('UserInfo') || 'NoData';
+      } catch (error) {
+        console.log(error.message);
+      }
+      return userId;
+    }
+
+    getUserToken().then((token) => {
+      // TODO Change Page 
+
+      if (token !== 'NoData'){ 
+
+        this.props.navigation.navigate('Login');
+      }
+
+    })  
+  }
+
   render() {
     const handlePress = () => false
     return (
