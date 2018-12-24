@@ -7,60 +7,83 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, TouchableOpacity, SafeAreaView} from 'react-native';
+import { Alert, Platform, StyleSheet, View, ImageBackground, SafeAreaView, Image, AsyncStorage} from 'react-native';
+import { Container, Header, Button, Content, ActionSheet, Text, Icon} from "native-base";
 
-
+// var Button = [ {Text: "Phone Book"}];
 
 
 
 //type Props = {};
 export default class Index extends Component {
+
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            userInfo : {},
+        };
+    }
+
+  componentWillMount() {
+
+    const getUserToken = async () => {
+      
+      let userId = '';
+      try {
+        userId = await AsyncStorage.getItem('UserInfo') || 'NoData';
+      } catch (error) {
+        console.log(error.message);
+      }
+      return userId;
+    }
+
+    getUserToken().then((token) => {
+      // TODO Change Page 
+
+      if (token === 'NoData'){ 
+
+        this.props.navigation.navigate('Login');
+      }else {
+
+        let userInfo = JSON.parse(token);
+        this.setState({
+          userInfo: userInfo.userInfo
+        })
+      }
+
+    })  
+  }
+
   render() {
     const handlePress = () => false
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       
-
+      <ImageBackground source={require('../asset/bg2.png')} style={ { flex: 1, width: null, height: null } }>
           <View style={styles.box1}>  
-          <Text style={styles.welcome}>Hello Suthiporn dok</Text>
+          <Image source={{uri: this.state.userInfo.imgPath }} style={{width: 60,height: 60, marginLeft: -275, marginTop: 30, borderRadius:30}}/>
+            <View style={{height: 60, width: '50%'}}>          
+              <Text style={{fontSize: 20, marginTop: -35}}> {this.state.userInfo.FirstName} {this.state.userInfo.LastName}  </Text>
+              <Text style={{fontSize: 15, marginTop: 0}}> { this.state.userInfo.PositionNameEng } </Text>
+            </View>
           </View>
 
           <View style={styles.container}> 
 
-            {/* <View style={styles.box1}>  
-            <Text style={styles.welcome}>Hello Suthiporn dok</Text>
-            </View> */}
-          
-            {/* <View style={[{ width: 160, height: 150, marginLeft: 20, marginTop: 20, backgroundColor: "rgb(255,108,224)", justifyContent: 'center'}]}> */}
-            <View style={styles.Btn01}>
-              <Button
-                onPress={handlePress}
-                title="Phone Book"
-
-                color="white"
-                accessibilityLabel="Learn more about this purple button"
-
-                style={styles.Btn01}
-
-              />
-            </View>
-
-            {/* <View style={[{ width: 160, height: 150, marginLeft: 200, marginTop: -150, backgroundColor: "rgb(255,193,108)", justifyContent: 'center'}]}> */}
-            <View style={styles.Btn02}>
-              <Button
-                onPress={handlePress}
-                title="Portals"
-
-                color="white"
-                accessibilityLabel="Learn more about this purple button"
-
-                style={styles.Btn02}
-
-              />
-            </View>
+            
+              <Button style={styles.Btn01} onPress={() => {  this.props.navigation.navigate('Contact'); }}>
+                  <Image source={require('../asset/PhoneBook.png')} style={{width: 75,height: 75, marginLeft: '20%', marginTop: -30}}/>
+                  <Text style={{marginTop: 80, marginLeft: -100}}>Phone Book</Text>
+              </Button>
 
 
-            <View style={styles.Btn03}>
+              <Button style={styles.Btn02}>
+                <Text>WorkFlow</Text>
+              </Button>
+
+
+            
               <Button
                 onPress={handlePress}
                 title="DmasApps"
@@ -71,9 +94,10 @@ export default class Index extends Component {
                 style={styles.Btn03}
 
               />
-            </View>
+         
 
           </View>
+          </ImageBackground>
       </SafeAreaView>
     );
      
@@ -86,22 +110,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "row",
-    backgroundColor: "rgb(0,0,0)",
+    // backgroundColor: "rgb(0,0,0)",
+    
     // marginTop: 60,
     paddingRight: 2,
     paddingLeft: 2,
-    paddingTop: 4
+    paddingTop: 2
   },
   welcome: {
     fontSize: 20,
-    textAlign: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    // margin: 0,
+    marginLeft: 220,
     
     
     //backgroundColor: '#F5FCFF',
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255,255,255,0.2)',
     marginTop: 20,
     width: "100%"
   
@@ -110,39 +132,34 @@ const styles = StyleSheet.create({
 
   Btn01: {
     backgroundColor: "rgba(255,255,255,.2)",
-    // borderRadius: 25,
-    flex: 1,
-            width: 160,
-            height: 150,
+ 
+            width: '32.50%',
+            height: 120,
             justifyContent: 'center',
-            margin: 2
+            margin: ".50%"
 
 
   },
 
   Btn02: {
     backgroundColor: "rgba(255,255,255,.2)",
-    // borderRadius: 25,
-    flex: 1,
-            width: 160,
-            height: 150,
-            // marginLeft: 200,
-            // marginTop: -150,
+    
+            width: '32.50%',
+            height: 120,
+            display: 'none',
             justifyContent: 'center',
-          margin: 2
+          margin: ".50%"
 
   },
 
   Btn03: {
     backgroundColor: "rgba(255,255,255,.2)",
-    // borderRadius: 25,
-    flex: 1,
-            width: 160,
-            height: 150,
-            // marginLeft: 200,
-            // marginTop: -150,
+
+            width: '32.50%',
+            height: 120,
+            display: 'none',
             justifyContent: 'center',
-            margin: 2
+            margin: ".50%"
 
   },
 
@@ -151,7 +168,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 60,
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255,255,255,1)',
+    marginTop: 20,
+    // borderWidth: 1,
   }
   /*Header: {
     leftComponent={ icon: 'menu', color: '#fff' },
