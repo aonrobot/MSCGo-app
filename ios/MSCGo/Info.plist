@@ -73,6 +73,14 @@
 		<string>FontAwesome5_Brands.ttf</string>
 		<string>FontAwesome5_Regular.ttf</string>
 		<string>FontAwesome5_Solid.ttf</string>
+		<string>Sarabun_Bold.ttf</string>
+		<string>Sarabun_Italic.ttf</string>
+		<string>Sarabun_Light.ttf</string>
+		<string>Sarabun_Regular.ttf</string>
+		<string>SourceSansPro_Bold.ttf</string>
+		<string>SourceSansPro_Italic.ttf</string>
+		<string>SourceSansPro_Light.ttf</string>
+		<string>SourceSansPro_Regular.ttf</string>
 	</array>
 </dict>
 </plist>

@@ -20,15 +20,15 @@ export default class Login extends Component {
     if ( username.length === 0 && password.length === 0  ) {
 
       this.setState({
-        usernameColor: 'rgba(255,0,0,0.4)',
-        passwordColor: 'rgba(255,0,0,0.4)',
+        usernameColor: 'rgba(255, 118, 117, 1)',
+        passwordColor: 'rgba(255, 118, 117, 1)',
         alertMessage: 'กรุณาใส่ Username หรือ Password ให้ครบ'
         
       });
     }else if ( username.length === 0 ) {
 
       this.setState({
-        usernameColor: 'rgba(255,0,0,0.4)',
+        usernameColor: 'rgba(255, 118, 117, 1)',
         passwordColor: 'rgba(255,255,255,0.4)',
         alertMessage: 'กรุณาใส่ Username ให้ครบ'
 
@@ -37,7 +37,7 @@ export default class Login extends Component {
 
       this.setState({
         usernameColor: 'rgba(255,255,255,0.4)',
-        passwordColor: 'rgba(255,0,0,0.4)',
+        passwordColor: 'rgba(255, 118, 117, 1)',
         alertMessage: 'กรุณาใส่ Password ให้ครบ'
       })
     }
@@ -96,37 +96,42 @@ export default class Login extends Component {
 
   render() {
     return (
-      <ImageBackground source={require('../asset/bg2.png')} style={ { flex: 1, width: null, height: null } }>
         <View style={styles.container}>
-          <Image style={styles.imageIcon}
-            source={require('../asset/msc1.png')}
-          />
-            <Text style={{ fontSize: 13 ,color:'red',marginBottom:5  }}> { this.state.alertMessage } </Text>
-
-          <TextInput 
-            value={this.state.username}
-            onChangeText={(username) => this.setState({ username })}
-            placeholder={'Username'}
-            style={[styles.input, { backgroundColor: this.state.usernameColor }]}
-
-          />
-          <TextInput
-            value={this.state.password}
-            onChangeText={(password) => this.setState({ password })}
-            placeholder={'Password'}
-            secureTextEntry={true}
-            style={[styles.input, { backgroundColor: this.state.passwordColor }]}
-          />
-          
-          <Button rounded
-            style={styles.btnLogin}
-            onPress={this.onLogin.bind(this)}
-          >
-              <Text uppercase={false} style={{ fontSize: 18, fontWeight:'bold'}}>LOG IN</Text>
-          </Button>
-
+          <View style={styles.loginBox}>
+            {/* <Image style={styles.imageIcon}
+              source={require('../asset/msc1.png')}
+            /> */}
+            <View style={styles.logoLabelBox}>
+              <Text style={styles.logoLabel}>MSC</Text>
+              <Text style={[styles.logoLabel, styles.logoLabelGo]}>Go</Text>
+            </View>
+            <Text style={{ fontSize: 13 ,color:'#d63031',marginBottom:5  }}> { this.state.alertMessage } </Text>
+            <TextInput
+              value={this.state.username}
+              onChangeText={(username) => this.setState({ username })}
+              placeholder={'Username'}
+              style={[styles.input, { borderBottomColor: this.state.usernameColor, borderBottomWidth: 2 }]}
+            />
+            <TextInput
+              value={this.state.password}
+              onChangeText={(password) => this.setState({ password })}
+              placeholder={'Password'}
+              secureTextEntry={true}
+              style={[styles.input, { borderBottomColor: this.state.passwordColor, borderBottomWidth: 2 }]}
+            />
+            <Button full
+              style={styles.btnLogin}
+              onPress={this.onLogin.bind(this)}
+            >
+                <Text uppercase={false} style={styles.btnLoginLabel}>LOG IN</Text>
+            </Button>
+            <Button full bordered
+              style={styles.btnForget}
+            >
+                <Text uppercase={false} style={styles.btnForgetLabel}>Register</Text>
+            </Button>
+          </View>
         </View>
-      </ImageBackground>
     );
   }
 }
@@ -136,6 +141,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#FEFEFE'
   },
   input: {
     width: 300,
@@ -143,30 +149,51 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     borderRadius: 25,
-
-        
+    fontSize: 16,
+    fontFamily: 'Source Sans Pro'
   },
-  btnLogin:{
-      width: 300,
-      height: 40,
-      marginBottom: 10,
-      alignSelf: "center",
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginTop: 20,
-
+  logoLabelBox: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginBottom: 25
   },
-  bgColor:{
+  logoLabel: {
+    fontSize: 40
+  },
+  logoLabelGo: {
+    paddingLeft: 8,
+    color: '#22CCDD'
+  },
+  loginBox: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  btnLogin: {
+    borderRadius: 20,
+    marginTop: 20,
+    backgroundColor: '#6c5ce7'
+  },
+  btnLoginLabel: {
+    fontFamily: 'Source Sans Pro',
+    fontSize: 18,
+    fontWeight:'bold'
+  },
+  btnForget: {
+    borderRadius: 20,
+    marginTop: 20,
+    borderColor: '#6c5ce7'
+  },
+  btnForgetLabel: {
+    color: '#6c5ce7',
+    fontSize: 14
+  },
+  bgColor: {
     backgroundColor: '#C6FFDD',
-
   },
-  imageIcon:{
+  imageIcon: {
     width:150,
     height:75,
     marginBottom:50,
-    
-
-  },
-
+  }
 });
