@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Alert,  TextInput, View, StyleSheet, ImageBackground, Image, AsyncStorage  } from 'react-native';
-import { Container, Header, Content, Button, Text } from 'native-base';
+import { Container, Header, Content, Button, Text, Icon, Thumbnail } from 'native-base';
+import Config from 'react-native-config'
 
 export default class Login extends Component {
   constructor(props) {
@@ -9,8 +10,8 @@ export default class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      usernameColor: 'rgba(255,255,255,0.4)',
-      passwordColor: 'rgba(255,255,255,0.4)',
+      usernameColor: 'rgba(0 ,0 ,0 , 0.1)',
+      passwordColor: 'rgba(0 ,0 ,0 , 0.1)',
       alertMessage : ''
     };
   }
@@ -20,29 +21,29 @@ export default class Login extends Component {
     if ( username.length === 0 && password.length === 0  ) {
 
       this.setState({
-        usernameColor: 'rgba(255, 118, 117, 1)',
-        passwordColor: 'rgba(255, 118, 117, 1)',
+        usernameColor: 'rgba(255, 118, 117, 0.4)',
+        passwordColor: 'rgba(255, 118, 117, 0.4)',
         alertMessage: 'กรุณาใส่ Username หรือ Password ให้ครบ'
         
       });
     }else if ( username.length === 0 ) {
 
       this.setState({
-        usernameColor: 'rgba(255, 118, 117, 1)',
-        passwordColor: 'rgba(255,255,255,0.4)',
+        usernameColor: 'rgba(255, 118, 117, 0.4)',
+        passwordColor: 'rgba(0 ,0 ,0 , 0.1)',
         alertMessage: 'กรุณาใส่ Username ให้ครบ'
 
       })
     }else if ( password.length === 0 ) {
 
       this.setState({
-        usernameColor: 'rgba(255,255,255,0.4)',
-        passwordColor: 'rgba(255, 118, 117, 1)',
+        usernameColor: 'rgba(0 ,0 ,0 , 0.1)',
+        passwordColor: 'rgba(255, 118, 117, 0.4)',
         alertMessage: 'กรุณาใส่ Password ให้ครบ'
       })
     }
     else {
-      fetch('http://mis_test.metrosystems.co.th/mscgoapp/api/login', {
+      fetch(Config.API_URL + '/api/login', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -87,9 +88,10 @@ export default class Login extends Component {
         .catch((error) => {
         console.error(error);
       });
+
       this.setState({
-        usernameColor: 'rgba(255,255,255,0.4)',
-        passwordColor: 'rgba(255,255,255,0.4)',
+        usernameColor: 'rgba(0 ,0 ,0 , 0.2)',
+        passwordColor: 'rgba(0 ,0 ,0 , 0.2)',
       });
     }
   }
@@ -101,33 +103,39 @@ export default class Login extends Component {
             {/* <Image style={styles.imageIcon}
               source={require('../asset/msc1.png')}
             /> */}
+            <Image style={{height: 150, width: 150}} source={require('../asset/images/logo.png')} />
             <View style={styles.logoLabelBox}>
-              <Text style={styles.logoLabel}>MSC</Text>
+              <Text style={styles.logoLabel}>Metrosystems</Text>
               <Text style={[styles.logoLabel, styles.logoLabelGo]}>Go</Text>
             </View>
             <Text style={{ fontSize: 13 ,color:'#d63031',marginBottom:5  }}> { this.state.alertMessage } </Text>
             <TextInput
               value={this.state.username}
+              autoFocus={true}
+              textContentType={'username'}
+              autoCapitalize={'none'}
               onChangeText={(username) => this.setState({ username })}
               placeholder={'Username'}
-              style={[styles.input, { borderBottomColor: this.state.usernameColor, borderBottomWidth: 2 }]}
+              style={[styles.input, { borderColor: this.state.usernameColor, borderBottomWidth: 2 }]}
             />
             <TextInput
               value={this.state.password}
+              textContentType={'password'}
               onChangeText={(password) => this.setState({ password })}
               placeholder={'Password'}
               secureTextEntry={true}
-              style={[styles.input, { borderBottomColor: this.state.passwordColor, borderBottomWidth: 2 }]}
+              style={[styles.input, { borderColor: this.state.passwordColor, borderBottomWidth: 2 }]}
             />
+
             <Button full
               style={styles.btnLogin}
-              onPress={this.onLogin.bind(this)}
-            >
+              onPress={this.onLogin.bind(this)}>
+                <Icon name='ios-log-in'/>
                 <Text uppercase={false} style={styles.btnLoginLabel}>LOG IN</Text>
             </Button>
+
             <Button full bordered
-              style={styles.btnForget}
-            >
+              style={styles.btnForget}>
                 <Text uppercase={false} style={styles.btnForgetLabel}>Register</Text>
             </Button>
           </View>
@@ -150,19 +158,24 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 25,
     fontSize: 16,
-    fontFamily: 'Source Sans Pro'
+    fontFamily: 'Source Sans Pro',
+    borderWidth: 0.4,
+    borderColor: 'rgba(0 ,0 ,0 , 0.5)'
   },
   logoLabelBox: {
     display: 'flex',
     flexDirection: 'row',
-    marginBottom: 25
+    marginBottom: 12,
+    marginTop: 12
   },
   logoLabel: {
-    fontSize: 40
+    fontFamily: 'Source Sans Pro',    
+    fontSize: 25
   },
   logoLabelGo: {
-    paddingLeft: 8,
-    color: '#22CCDD'
+    fontFamily: 'Source Sans Pro',
+    paddingLeft: 3,
+    color: '#2d98da'
   },
   loginBox: {
     flex: 1,
@@ -172,17 +185,22 @@ const styles = StyleSheet.create({
   btnLogin: {
     borderRadius: 20,
     marginTop: 20,
-    backgroundColor: '#6c5ce7'
+    backgroundColor: '#3C40C5',
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    shadowColor: '#6569d8',
+    shadowOffset: { height: 0, width: 0 },
   },
   btnLoginLabel: {
     fontFamily: 'Source Sans Pro',
     fontSize: 18,
-    fontWeight:'bold'
+    fontWeight:'bold',
+    marginLeft: -20
   },
   btnForget: {
     borderRadius: 20,
     marginTop: 20,
-    borderColor: '#6c5ce7'
+    borderColor: '#3C40C5'
   },
   btnForgetLabel: {
     color: '#6c5ce7',
