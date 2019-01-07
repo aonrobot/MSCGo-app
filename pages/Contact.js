@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Alert,AsyncStorage } from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Icon, Title ,Input ,Item ,  Content, List, ListItem, Thumbnail, Text, rounded ,Spinner} from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Icon, Title ,Input ,Item ,  Content, List, ListItem, Thumbnail, Text, rounded ,Spinner } from 'native-base';
 export default class Contact extends Component {
 
     constructor(props) {
@@ -159,20 +159,14 @@ export default class Contact extends Component {
                         placeholder="Search" style={{ fontSize:14}} />
                     </Item>
                 </View>
-
             {
-
                 (this.state.loading == false) ?
-                    
                     <View style={[styles.loader]}>
                         <Spinner color='blue' />
                     </View>
                 :
-
                 this.listEmployee(this.state.empData)
-
             }
-
             </Content>
         </Container>
         ); 
