@@ -121,6 +121,7 @@ export default class Login extends Component {
             <TextInput
               value={this.state.password}
               textContentType={'password'}
+              autoCapitalize={'none'}
               onChangeText={(password) => this.setState({ password })}
               placeholder={'Password'}
               secureTextEntry={true}
@@ -136,7 +137,8 @@ export default class Login extends Component {
 
             <Button full bordered
               style={styles.btnForget}>
-                <Text uppercase={false} style={styles.btnForgetLabel}>Register</Text>
+                <Icon name='ios-lock' style={styles.btnForgetIcon}/>
+                <Text uppercase={false} style={styles.btnForgetLabel}>Forget Password</Text>
             </Button>
           </View>
         </View>
@@ -202,9 +204,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderColor: '#3C40C5'
   },
+  btnForgetIcon: {
+    color:'#3C40C5',
+    fontSize: 16
+  },
   btnForgetLabel: {
     color: '#6c5ce7',
-    fontSize: 14
+    fontSize: 12,
+    marginLeft: -25
   },
   bgColor: {
     backgroundColor: '#C6FFDD',
