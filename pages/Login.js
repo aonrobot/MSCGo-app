@@ -121,6 +121,7 @@ export default class Login extends Component {
             <TextInput
               value={this.state.password}
               textContentType={'password'}
+              autoCapitalize={'none'}
               onChangeText={(password) => this.setState({ password })}
               placeholder={'Password'}
               secureTextEntry={true}
