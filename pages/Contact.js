@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Alert,AsyncStorage } from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Icon, Title ,Input ,Item ,  Content, List, ListItem, Thumbnail, Text, rounded ,Spinner} from 'native-base';
+import { Container, Header, Left, Body, Right, Button, Icon, Title ,Input ,Item , Content, List, ListItem, Thumbnail, Text, rounded ,Spinner } from 'native-base';
+import Config from 'react-native-config'
+
 export default class Contact extends Component {
 
     constructor(props) {
@@ -11,7 +13,20 @@ export default class Contact extends Component {
             empDataTemp : [],
             token: '',
             loading: false,
+            outerScrollEnable: true,
         };
+
+        verticalScroll = (index) => {
+            if(index !== 1 ){
+                this.setStaut({
+                outerScrollEnable: false
+                })
+            }else{
+                this.setStaut({
+                outerScrollEnable: true
+                })
+            }
+        }
     }
 
     componentWillMount() {
@@ -109,20 +124,30 @@ export default class Contact extends Component {
                         return ( 
                             <ListItem thumbnail style={styles.listitem}>
                             <Left>
-                                <Thumbnail  style={styles.imgbox} source={{ uri: item.imgPath }} />
+                                <Thumbnail style={styles.imgbox} source={{ uri: item.imgPath }} />
                             </Left>
-                            <Body>
-                                <Text>
+                            <Body style={{paddingTop: 5,paddingBottom: 5}}>
+                                <Text style={[styles.text1color]}>
                                 {
                                     (item.NickName != "") ?
                                     "("+item.NickName+") ": ""
                                 }
                                 {item.FullName}
                                 </Text>
-                                <Text>{item.email}</Text>
-                                <Text note numberOfLines={1}> { item.Phone3 }  </Text>
+                                <Text style={[{ fontSize:14 },styles.text2color]}> {item.email}</Text>
                                 
+                                    <Text note numberOfLines={1} style={[styles.text2color]} > 
+                                    { 
+                                        ( item.Phone3  != "") ?
+                                        "("+item.Phone3+") ": "     -"
+                                    }  
+                                    </Text>                              
                             </Body>
+                            <Right style={{marginRight: 14}} >
+                                <Button iconLeft transparent primary>
+                                    <Icon type="FontAwesome5" name="phone" style={{fontSize: 22, color: 'green'}} />
+                                </Button>
+                            </Right>
                             </ListItem>
                         )
                     })
@@ -135,44 +160,38 @@ export default class Contact extends Component {
         return (
 
         <Container>
-            <Header  style={styles.header}>
-                <Left>
+            <Header style={styles.header} >
+                <Left style={[{flex: 1}]}>
                     <Button transparent onPress={() => {  this.props.navigation.navigate('Home'); }}>
-                    <Icon name='arrow-back' style={styles.backbtn} />
+                        <Icon type="Ionicons" name='ios-arrow-back' style={styles.backbtn} />
                     </Button>
                 </Left>
-                <Body>
-                    <Title style={styles.textheader}>Contacts</Title>
+                <Body style={[{flex: 9}]}>
+                    <Title style={[styles.textheader]}>Phone Book</Title>
                 </Body>
-                <Right>
+                {/* <Right style={{backgroundColor: 'black'}}>
                     <Button transparent>
                     <Icon name='menu' />
                     </Button>
-                </Right>
+                </Right> */}
             </Header>
             <Content>
                 <View style={[styles.searchbox]}>
-                    <Item rounded style={{ height: 35 }}>
-                        <Icon name="ios-search" style={styles.listicon} />
+                    <Item rounded style={[{ height: 40 },{backgroundColor: '#ececec'}]}>
+                        <Icon name="ios-search" style={[{marginLeft:7},styles.listicon]} />
                         <Input 
                         onChangeText = {(text) => this.onSearchChange(text)}
                         placeholder="Search" style={{ fontSize:14}} />
                     </Item>
                 </View>
-
             {
-
                 (this.state.loading == false) ?
-                    
                     <View style={[styles.loader]}>
                         <Spinner color='blue' />
                     </View>
                 :
-
                 this.listEmployee(this.state.empData)
-
             }
-
             </Content>
         </Container>
         ); 
@@ -183,7 +202,6 @@ const styles = StyleSheet.create({
     header: {
         backgroundColor: '#FFFFFF',
         height: 60,
-
     },
 
     backbtn: {
@@ -205,19 +223,19 @@ const styles = StyleSheet.create({
 
     searchbox: {
         flex:1,
-        marginTop: 15,
+        marginTop: 20,
         marginLeft: 20,
         marginRight: 20,
-        marginBottom: 5,
+        marginBottom: 20,
         // margin: 10,
     },
 
     imgbox: {
-        borderWidth: 1,
+        // borderWidth: 0.2,
         borderColor: 'black',
         backgroundColor: '#d6d7da',
-        height:40,
-        width:40,
+        height:55,
+        width:55,
     },
 
     listicon: {
@@ -235,6 +253,18 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+
+    text1color: {
+        color: '#656262', 
+    },
+
+    text2color: {
+        color: '#AAAAAA', 
+    },
+
+    text3color: {
+        color: '#DDDDDD', 
     },
 
 });

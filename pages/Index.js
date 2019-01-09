@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Alert, Platform, StyleSheet, View, ImageBackground, SafeAreaView, Image, AsyncStorage} from 'react-native';
 import { Container, Header, Title, Left, Right, Body, Button, Content, ActionSheet, Text, Icon} from "native-base";
+import Config from 'react-native-config'
 
 export default class Index extends Component {
 
@@ -8,7 +9,7 @@ export default class Index extends Component {
       super(props);
       
       this.state = {
-          userInfo : {},
+          userInfo : {},   
       };
   }
 
@@ -27,10 +28,9 @@ export default class Index extends Component {
 
     getUserToken().then((token) => {
       // TODO Change Page 
-      if (token === 'NoData'){ 
+      if (token === 'NoData') { 
         this.props.navigation.navigate('Login');
-      }else {
-
+      } else {
         let userInfo = JSON.parse(token);
         this.setState({
           userInfo: userInfo.userInfo
