@@ -43,7 +43,7 @@ export default class Login extends Component {
       })
     }
     else {
-      fetch(Config.API_URL + '/api/login', {
+      fetch('http://mis_test.metrosystems.co.th/mscgoapp/api/login', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
