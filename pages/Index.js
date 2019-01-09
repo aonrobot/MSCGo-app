@@ -48,40 +48,38 @@ export default class Index extends Component {
   render() {
     const handlePress = () => false
     return (
+      
       <SafeAreaView style={{flex: 1, backgroundColor: '#f7f7f7'}}>
         {/* <ImageBackground source={require('../asset/bg2.png')} style={ { flex: 1, width: null, height: null } }> */}
-          <View style={styles.box1}>  
-          <Image source={{uri: this.state.userInfo.imgPath }} style={{width: 60,height: 60, marginLeft: -275, marginTop: 30, borderRadius:30,backgroundColor: '#f7f7f7'}}/>
-            <View style={{height: 60, width: '50%'}}>          
-              <Text style={{fontSize: 20, marginTop: -35}}> {this.state.userInfo.FirstName} {this.state.userInfo.LastName}  </Text>
-              <Text style={{fontSize: 15, marginTop: 0}}> { this.state.userInfo.PositionNameEng } </Text>
+          
+          <ImageBackground source={require('../asset/images/77-4.png')} style={ { height: 100 } }> 
+          <Image source={{uri: this.state.userInfo.imgPath }} style={{width:70,height:70, marginTop:25,marginLeft:10,borderRadius:40, backgroundColor: '#f7f7f7'}}/>
+            <View style={{height: 60, width: '100%'}}>          
+              <Text style={{fontSize: 20, marginTop: -43,marginLeft:85}}> {this.state.userInfo.FirstName} {this.state.userInfo.LastName}  </Text>
+              <Text style={{fontSize: 15, marginTop: 0,marginLeft:85}}> { this.state.userInfo.PositionNameEng } </Text>
             </View>
-          </View>
+            </ImageBackground>
+            <Text style={{fontSize: 18,marginLeft:10,marginTop:10,fontWeight:'bold', color:'#282828'}}>Explore METRO Go</Text>
+            <Text style={{fontSize: 12,marginLeft:10, color:'#4a4a4a'}}>Checkout all 2 services</Text>
 
           <View style={styles.container}>
               <Button style={styles.Btn01} onPress={() => {  this.props.navigation.navigate('Contact'); }}>
-                  <Image source={require('../asset/images/phone5.png')} style={{width: 60,height: 60,marginLeft:21,marginTop:5,marginBottom:'auto'}}/>
+                  <Image source={require('../asset/images/contact.png')} style={{width: 65,height: 65,marginLeft:18,marginTop:5,marginBottom:'auto'}}/>
                   <Text style={{fontSize: 12,marginTop:'auto', marginLeft:'auto', color:'#282828'}}>Phone Book</Text>
               </Button>
-
-              <Button style={styles.Btn02}>
-                <Text>WorkFlow</Text>
-              </Button>
-
-              <Button
-                onPress={handlePress}
-                title="DmasApps"
-                color="white"
-                accessibilityLabel="Learn more about this purple button"
-                style={styles.Btn03}
-              />
           </View>
+          <View style={styles.containers}>
+            <Text style={{fontSize: 18,marginLeft:10,fontWeight:'bold', color:'#282828'}}>METRO Happiness</Text>
+          </View>
+          
+
           <Button danger full onPress={() => { this.logout() }}>
             <Icon name='ios-exit'/>
             <Text>Logout</Text>
           </Button>
         {/* </ImageBackground> */}
       </SafeAreaView>
+     
     );
   }
 }
@@ -93,7 +91,12 @@ const styles = StyleSheet.create({
     paddingRight: 2,
     paddingLeft: 2,
     paddingTop: 2,
-    margin:'auto'
+    margin:'auto',
+    height:'60%'
+    
+  },
+  containers: {
+    flex: 1,
   },
   welcome: {
     fontSize: 20,
@@ -110,11 +113,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 15,
     marginLeft: 10,
-    shadowOpacity: 1,
-    shadowRadius: 10,
+    //shadow for ios
+    shadowOpacity: 0.7,
+    shadowRadius: 5,
     shadowColor: '#cacaca',
     shadowOffset: { height: 0, width: 0 },
-    marginTop:10
+    marginTop:10,
+    //shadow for android
+    elevation: 8,
+    position:'relative',
+
+  
 
   },
   Btn02: {
@@ -151,8 +160,8 @@ const styles = StyleSheet.create({
   box1: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 60,
+    height: 100,
     backgroundColor: 'rgba(255,255,255,1)',
-    marginTop: 20,
+    
   }
 });
