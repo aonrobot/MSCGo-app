@@ -195,6 +195,7 @@ const styles = StyleSheet.create({
   },
   btnLoginLabel: {
     fontFamily: 'Source Sans Pro',
+    color: '#FFF',
     fontSize: 18,
     fontWeight:'bold',
     marginLeft: -20
