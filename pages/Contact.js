@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Alert, AsyncStorage, StatusBar } from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title ,Input ,Item , Content, List, ListItem, Thumbnail, Text, rounded ,Spinner } from 'native-base';
 import Config from 'react-native-config'
-
+import Modal from "react-native-modal";
 
 export default class Contact extends Component {
 
@@ -15,8 +15,12 @@ export default class Contact extends Component {
             token: '',
             loading: false,
             refreshing: false,
+            isModalVisible: false,
         };
     }
+
+    _toggleModal = () =>
+    this.setState({ isModalVisible: !this.state.isModalVisible });
 
     componentWillMount() {
 
@@ -139,7 +143,8 @@ export default class Contact extends Component {
                             <Right style={{marginRight: 14,padding:0}} >
                                 <Button iconLeft transparent primary
                                     onPress={() => {
-                                                this.onClickCall(item.Phone3)
+                                                // this.onClickCall(item.Phone3)
+                                                this._toggleModal
                                             }
                                         }
                                     >
@@ -189,17 +194,27 @@ export default class Contact extends Component {
                             placeholder="Search" style={{ fontSize:14}} />
                         </Item>
                     </View>
-                {
-                    (this.state.loading == false) ?
-                        <View style={[styles.loader]}>
-                            <Spinner color='blue' />
-                        </View>
-                    :
-                    this.listEmployee(this.state.empData)
-                }
+                    {
+                        (this.state.loading == false) ?
+                            <View style={[styles.loader]}>
+                                <Spinner color='blue' />
+                            </View>
+                        :
+                        this.listEmployee(this.state.empData)
+                    }
                 </Content>
+                <View>
+                    <Modal isVisible={this.state.isModalVisible}>
+                        <View style={{ flex: 1 }}>
+                            <Text>Hello!</Text>
+                            <TouchableOpacity onPress={this._toggleModal}>
+                                <Text>Hide me!</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </Modal>
+                </View>
             </Container>
-        ); 
+        );
     }   
 }
 
