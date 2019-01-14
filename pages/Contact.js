@@ -179,7 +179,7 @@ export default class Contact extends Component {
         const deviceWidth = Dimensions.get("window").width;
         const deviceHeight = Platform.OS === "ios" 
         ? Dimensions.get("window").height
-        : require("react-native-extra-dimensions-android").get("REAL_WINDOW_HEIGHT");
+        : Dimensions.get('screen').height
 
         return (
             <Container>
@@ -213,15 +213,27 @@ export default class Contact extends Component {
                     }
                 </Content>
                 <View>
-                    <Modal isVisible={this.state.isModalVisible}>
-                        <View style={{ flex: 1 }}
-                            deviceWidth={deviceWidth}
-                            deviceHeight={deviceHeight}
-                        >
-                            <Text>Hello!</Text>
-                            <TouchableOpacity onPress={this._toggleModal}>
-                                <Text>Hide me!</Text>
-                            </TouchableOpacity>
+                    <Modal isVisible={this.state.isModalVisible}
+                    deviceWidth={deviceWidth}
+                    deviceHeight={deviceHeight}
+                    >
+                        <View style={ styles.modalframe1 }>
+                            <View style={[styles.modalinfo]}>
+                                <Text>Hello!</Text>
+                                {/* <TouchableOpacity onPress={this._toggleModal}>
+                                    <Text>Hide me!</Text>
+                                </TouchableOpacity> */}
+                            </View>
+                            <View style={[styles.modalinfo_footer]}>
+                                <Button style={styles.modalinfo_callbtn}>
+                                    <Icon type="FontAwesome" name="phone" style={{fontSize: 22,margin:0}} />
+                                    <Text style={{fontSize: 15,padding:0}}>Call</Text>
+                                </Button>
+                                <Button style={styles.modalinfo_cancelbtn} onPress={this._toggleModal}>
+                                    <Icon type="MaterialIcons" name="cancel" style={{fontSize: 22,margin:0}} />
+                                    <Text style={{fontSize: 15,padding:0}}>Cancel</Text>
+                                </Button>
+                            </View>
                         </View>
                     </Modal>
                 </View>
@@ -310,6 +322,42 @@ const styles = StyleSheet.create({
     text3color: {
         fontFamily: 'Source Sans Pro',
         color: '#949496', 
+    },
+
+    modalframe1: {
+        flex:1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+
+    modalinfo: {
+        width:"75%",
+        height:275,
+        backgroundColor: "#FFF",
+        // borderWidth: 1,
+        // borderColor: "#000",
+        borderRadius: 3,
+    },
+
+    modalinfo_callbtn: {
+        width: "100%",
+        backgroundColor: "green",
+        color: "#FFF",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+
+    modalinfo_cancelbtn: {
+        width: "100%",
+        backgroundColor: "red",
+        color: "#FFF",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+
+    modalinfo_footer: {
+        width:"75%",
+        borderRadius: 3,
     },
 
 });
