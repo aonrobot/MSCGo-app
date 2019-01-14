@@ -171,7 +171,7 @@ export default class Contact extends Component {
         var phone = phone.slice(1);
         phone = '02089' + phone;
         //Alert.alert(phone)
-        Linking.openURL('CISCOTEL:' + phone).catch(err => console.error('An error occurred', err));
+        Linking.openURL('CISCOTEL://' + phone).catch(err => console.error('An error occurred', err));
     }
     callJabber2 = (phone) => {
         var phone = phone.slice(1);
