@@ -167,7 +167,7 @@ export default class Contact extends Component {
             </List> 
     }
 
-    call = (phone) => {
+    callJabber = (phone) => {
         var phone = phone.slice(1);
         phone = '+662089' + phone;
         Linking.openURL('CISCOTEL://' + phone).catch(err => console.error('An error occurred', err));
@@ -224,7 +224,7 @@ export default class Contact extends Component {
                                 </TouchableOpacity> */}
                             </View>
                             <View style={[styles.modalinfo_footer]}>
-                                <Button style={styles.modalinfo_callbtn} onPress={() => {this.call(this.state.currentPhoneNumber)}}>
+                                <Button style={styles.modalinfo_callbtn} onPress={() => {this.callJabber(this.state.currentPhoneNumber)}}>
                                     <Icon type="FontAwesome" name="phone" style={{fontSize: 22,margin:0}} />
                                     <Text style={{fontSize: 15,padding:0}}>Call</Text>
                                 </Button>
