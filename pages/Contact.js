@@ -169,8 +169,15 @@ export default class Contact extends Component {
 
     callJabber = (phone) => {
         var phone = phone.slice(1);
-        phone = '+662089' + phone;
-        Linking.openURL('CISCOTEL://' + phone).catch(err => console.error('An error occurred', err));
+        phone = '02089' + phone;
+        //Alert.alert(phone)
+        Linking.openURL('CISCOTEL:' + phone).catch(err => console.error('An error occurred', err));
+    }
+    callJabber2 = (phone) => {
+        var phone = phone.slice(1);
+        phone = '02089' + phone;
+        //Alert.alert(phone)
+        Linking.openURL('CLICKTOCALL://' + phone).catch(err => console.error('An error occurred', err));
     }
 
     render() {
@@ -227,6 +234,10 @@ export default class Contact extends Component {
                                 <Button style={styles.modalinfo_callbtn} onPress={() => {this.callJabber(this.state.currentPhoneNumber)}}>
                                     <Icon type="FontAwesome" name="phone" style={{fontSize: 22,margin:0}} />
                                     <Text style={{fontSize: 15,padding:0}}>Call</Text>
+                                </Button>
+                                <Button style={styles.modalinfo_callbtn} onPress={() => {this.callJabber2(this.state.currentPhoneNumber)}}>
+                                    <Icon type="FontAwesome" name="phone" style={{fontSize: 22,margin:0}} />
+                                    <Text style={{fontSize: 15,padding:0}}>Call2</Text>
                                 </Button>
                                 <Button style={styles.modalinfo_cancelbtn} onPress={this._toggleModal}>
                                     <Icon type="MaterialIcons" name="cancel" style={{fontSize: 22,margin:0}} />
