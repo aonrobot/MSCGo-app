@@ -171,13 +171,13 @@ export default class Contact extends Component {
         var phone = phone.slice(1);
         phone = '02089' + phone;
         //Alert.alert(phone)
-        Linking.openURL('CISCOTEL://' + phone).catch(err => console.error('An error occurred', err));
+        Linking.openURL('TEL://' + phone).catch(err => console.error('An error occurred', err));
     }
     callJabber2 = (phone) => {
         var phone = phone.slice(1);
-        phone = '02089' + phone;
+        phone = '510089' + phone;
         //Alert.alert(phone)
-        Linking.openURL('CLICKTOCALL://' + phone).catch(err => console.error('An error occurred', err));
+        Linking.openURL('TEL://' + phone).catch(err => console.error('An error occurred', err));
     }
 
     render() {
@@ -375,11 +375,11 @@ const styles = StyleSheet.create({
 
     modalinfo_imgbox_farme: {
         flex: 1,
-        alignItems: "center",
+        alignItems: "center"
     },
 
     modalinfo_imgbox: {
-        borderRadius:200,
+        borderRadius:10,
         borderColor: 'black',
         backgroundColor: '#d6d7da',
         height:"50%",
