@@ -169,26 +169,26 @@ export default class Contact extends Component {
 
     callJabber = (phone) => {
         var phone = phone.slice(1);
-        phone = 'CISCOTEL://78451';
-        //Alert.alert(phone)
+        phone = 'CISCOTEL://Work:78451';
+        Alert.alert(phone)
         Linking.openURL(phone).catch(err => console.error('An error occurred', err));
     }
     callJabber2 = (phone) => {
         var phone = phone.slice(1);
         phone = 'CISCOTEL://78451@metrosystems.co.th';
-        //Alert.alert(phone)
+        Alert.alert(phone)
         Linking.openURL(phone).catch(err => console.error('An error occurred', err));
     }
     callJabber3 = (phone) => {
         var phone = phone.slice(1);
         phone = 'CISCOTEL://auttawir@metrosystems.co.th';
-        //Alert.alert(phone)
+        Alert.alert(phone)
         Linking.openURL(phone).catch(err => console.error('An error occurred', err));
     }
     callJabber4 = (phone) => {
         var phone = phone.slice(1);
         phone = 'CISCOTEL://Work:auttawir@metrosystems.co.th';
-        //Alert.alert(phone)
+        Alert.alert(phone)
         Linking.openURL(phone).catch(err => console.error('An error occurred', err));
     }
 
