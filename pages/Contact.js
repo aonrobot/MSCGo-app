@@ -219,6 +219,9 @@ export default class Contact extends Component {
                     >
                         <View style={ styles.modalframe1 }>
                             <View style={[styles.modalinfo]}>
+                                <View style={styles.modalinfo_imgbox_farme}>
+                                    <Thumbnail style={styles.modalinfo_imgbox} />
+                                </View>
                                 <Text>Hello!</Text>
                                 {/* <TouchableOpacity onPress={this._toggleModal}>
                                     <Text>Hide me!</Text>
@@ -357,7 +360,21 @@ const styles = StyleSheet.create({
 
     modalinfo_footer: {
         width:"75%",
-        borderRadius: 3,
+        // borderRadius: 3,
+    },
+
+    modalinfo_imgbox_farme: {
+        flex: 1,
+        alignItems: "center",
+    },
+
+    modalinfo_imgbox: {
+        borderRadius:200,
+        borderColor: 'black',
+        backgroundColor: '#d6d7da',
+        height:"50%",
+        width:"50%",
+        top:"-25%"
     },
 
 });
