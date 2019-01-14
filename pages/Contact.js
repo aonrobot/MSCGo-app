@@ -16,14 +16,22 @@ export default class Contact extends Component {
             loading: false,
             refreshing: false,
             isModalVisible: false,
+            currentNickName: '',
+            currentName: '',
+            currentEmail: '',
+            currentImage: '',
             currentPhoneNumber: ''
         };
     }
 
-    _toggleModal = (phone) => {
+    _toggleModal = (phone,nickname,name,email,image) => {
         this.setState({ 
             isModalVisible: !this.state.isModalVisible,
-            currentPhoneNumber: phone
+            currentPhoneNumber: phone,
+            currentNickName:nickname,
+            currentName:name,
+            currentEmail:email,
+            currentImage:image
         });
     }
 
@@ -156,7 +164,8 @@ export default class Contact extends Component {
                                     >
                                     <Icon type="FontAwesome" name="phone" style={{fontSize: 22, color: 'green'}} />
                                 </Button> */}
-                                <TouchableOpacity onPress={() => this._toggleModal(item.Phone3)}>
+
+                                <TouchableOpacity onPress={() => this._toggleModal(item.Phone3,item.NickName,item.FullName,item.email,item.imgPath)}>
                                     <Icon type="FontAwesome" name="phone" style={{fontSize: 22, color: '#20bf6b'}} />
                                 </TouchableOpacity>
                             </Right>
@@ -226,12 +235,25 @@ export default class Contact extends Component {
                         <View style={ styles.modalframe1 }>
                             <View style={[styles.modalinfo]}>
                                 <View style={styles.modalinfo_imgbox_farme}>
-                                    <Thumbnail style={styles.modalinfo_imgbox} />
+                                    <Thumbnail style={[styles.modalinfo_imgbox]} source={{ uri: this.state.currentImage }} />
                                 </View>
-                                <Text>Hello!</Text>
-                                {/* <TouchableOpacity onPress={this._toggleModal}>
-                                    <Text>Hide me!</Text>
-                                </TouchableOpacity> */}
+                                <View style={[{flex:1,alignItems: 'center',top:"-16%"}]}>
+                                    <Text style={{fontSize:22,fontWeight: 'bold'}}>{this.state.currentNickName}</Text>
+                                </View>
+                                <View style={[{flex:1,flexDirection:'row', flexWrap:'wrap',justifyContent:'center'},styles.modalinfo_Moveup]}>
+                                    <Icon type="FontAwesome" name="phone" style={{fontSize: 20, color: '#000',top:3}} />
+                                    <Text> : </Text>
+                                    <Text>{this.state.currentPhoneNumber}</Text>
+                                </View>
+                                <View style={[{flex:1,flexDirection:'row', flexWrap:'wrap',justifyContent:'center'},styles.modalinfo_Moveup]}>
+                                    <Icon type="Ionicons" name="md-contact" style={{fontSize: 20, color: '#000',top:3}} />
+                                    <Text> : </Text>
+                                    <Text>{this.state.currentName}</Text>
+                                </View>
+                                <View style={[{flex:1,flexDirection:'row', flexWrap:'wrap',justifyContent:'center'},styles.modalinfo_Moveup]}>
+                                    {/* <Text>อีเมล : </Text> */}
+                                    <Text>{this.state.currentEmail}</Text>
+                                </View>
                             </View>
                             <View style={[styles.modalinfo_footer]}>
                                 <Button style={styles.modalinfo_callbtn} onPress={() => {this.callJabber(this.state.currentPhoneNumber)}}>
@@ -242,7 +264,7 @@ export default class Contact extends Component {
                                     <Icon type="FontAwesome" name="phone" style={{fontSize: 22,margin:0}} />
                                     <Text style={{fontSize: 15,padding:0}}>Call2</Text>
                                 </Button>
-                                <Button style={styles.modalinfo_cancelbtn} onPress={this._toggleModal}>
+                                <Button style={styles.modalinfo_cancelbtn} onPress={() => this._toggleModal('','','','','')}>
                                     <Icon type="MaterialIcons" name="cancel" style={{fontSize: 22,margin:0}} />
                                     <Text style={{fontSize: 15,padding:0}}>Cancel</Text>
                                 </Button>
@@ -374,17 +396,22 @@ const styles = StyleSheet.create({
     },
 
     modalinfo_imgbox_farme: {
-        flex: 1,
+        flex: 4,
         alignItems: "center",
     },
 
     modalinfo_imgbox: {
-        borderRadius:200,
-        borderColor: 'black',
+        // borderRadius:200,
+        borderWidth:6,
+        borderColor: '#FFF',
         backgroundColor: '#d6d7da',
-        height:"50%",
+        height:"100%",
         width:"50%",
-        top:"-25%"
+        top:"-40%",
+    },
+
+    modalinfo_Moveup: {
+        top:"-12%",
     },
 
 });
