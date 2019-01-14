@@ -45,9 +45,15 @@ export default class Index extends Component {
   }
 
   async logout() {
-    await AsyncStorage.setItem('UserInfo', 'NoData');
+    //await AsyncStorage.setItem('UserInfo', 'NoData');
     //this.props.navigation.navigate('Login');
-    Linking.openURL('fb://profile/1682011142067333').catch(err => console.error('An error occurred', err));
+    Linking.openURL('tel://+66838692401').catch(err => console.error('An error occurred', err));
+  }
+
+  logout2() {
+    //await AsyncStorage.setItem('UserInfo', 'NoData');
+    //this.props.navigation.navigate('Login');
+    Linking.openURL('CISCOTEL://+66838692401').catch(err => console.error('An error occurred', err));
   }
 
   callNumber = (url) =>{
@@ -75,6 +81,9 @@ export default class Index extends Component {
               </Text>
               <Text style={styles.subTitle}> { this.state.userInfo.PositionNameEng } </Text>
               <Button danger style={styles.btnLogout} onPress={() => { this.logout() }}>
+                <Icon name='ios-log-out' style={styles.btnLogoutIcon}/>
+              </Button>
+              <Button danger style={styles.btnLogout} onPress={() => { this.logout2() }}>
                 <Icon name='ios-log-out' style={styles.btnLogoutIcon}/>
               </Button>
             </View>
