@@ -157,7 +157,7 @@ export default class Contact extends Component {
                                     <Icon type="FontAwesome" name="phone" style={{fontSize: 22, color: 'green'}} />
                                 </Button> */}
                                 <TouchableOpacity onPress={() => this._toggleModal(item.Phone3)}>
-                                    <Icon type="FontAwesome" name="phone" style={{fontSize: 22, color: 'green'}} />
+                                    <Icon type="FontAwesome" name="phone" style={{fontSize: 22, color: '#20bf6b'}} />
                                 </TouchableOpacity>
                             </Right>
                             </ListItem>
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Sarabun',
         // color: '#656262', 
 
-        color: "#2b30db",
+        color: "#3867d6",
     },
 
     text2color: {
@@ -340,7 +340,7 @@ const styles = StyleSheet.create({
 
     modalinfo_callbtn: {
         width: "100%",
-        backgroundColor: "green",
+        backgroundColor: "#20bf6b",
         color: "#FFF",
         alignItems: "center",
         justifyContent: "center",
@@ -348,7 +348,7 @@ const styles = StyleSheet.create({
 
     modalinfo_cancelbtn: {
         width: "100%",
-        backgroundColor: "red",
+        backgroundColor: "#eb3b5a",
         color: "#FFF",
         alignItems: "center",
         justifyContent: "center",
