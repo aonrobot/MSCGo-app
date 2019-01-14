@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Alert, Platform, StyleSheet, View, ImageBackground,
-        SafeAreaView, Image, AsyncStorage, StatusBar, Linking} from 'react-native';
-import { Container, Header, Title, Left, Right, Body, Button, Content, ActionSheet, Text, Icon} from "native-base";
+        SafeAreaView, Image, AsyncStorage, StatusBar} from 'react-native';
+import { Container, Header, Title, Left, Right, Body, Button, Content, ActionSheet, Text, Icon, Thumbnail} from "native-base";
 import Config from 'react-native-config'
 
 export default class Index extends Component {
@@ -45,25 +45,8 @@ export default class Index extends Component {
   }
 
   async logout() {
-    //await AsyncStorage.setItem('UserInfo', 'NoData');
-    //this.props.navigation.navigate('Login');
-    Linking.openURL('tel://+66838692401').catch(err => console.error('An error occurred', err));
-  }
-
-  logout2() {
-    //await AsyncStorage.setItem('UserInfo', 'NoData');
-    //this.props.navigation.navigate('Login');
-    Linking.openURL('CISCOTEL://+66838692401').catch(err => console.error('An error occurred', err));
-  }
-
-  callNumber = (url) =>{
-      Linking.canOpenURL(url).then(supported => {
-      if (!supported) {
-      console.log('Can\'t handle url: ' + url);
-      } else {
-      return Linking.openURL(url);
-      }
-    }).catch(err => console.error('An error occurred', err));
+    await AsyncStorage.setItem('UserInfo', 'NoData');
+    this.props.navigation.navigate('Login');
   }
 
   render() {
@@ -83,9 +66,6 @@ export default class Index extends Component {
               <Button danger style={styles.btnLogout} onPress={() => { this.logout() }}>
                 <Icon name='ios-log-out' style={styles.btnLogoutIcon}/>
               </Button>
-              <Button danger style={styles.btnLogout} onPress={() => { this.logout2() }}>
-                <Icon name='ios-log-out' style={styles.btnLogoutIcon}/>
-              </Button>
             </View>
             <View style={{padding: 15}}>
               <Image source={{uri: this.state.userInfo.imgPath }} style={{width:70, height:70, borderRadius:40}}/>
@@ -100,8 +80,14 @@ export default class Index extends Component {
             <View style={styles.services}>
                 <Button style={styles.Btn01} small onPress={() => {  this.props.navigation.navigate('Contact'); }}>
                   <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                    <Image source={require('../asset/images/contact.png')} style={{width: 65,height: 65}}/>
-                    <Text style={{fontSize: 14, fontFamily: 'Source Sans Pro', color:'#282828'}}>Phone Book</Text>
+                    <Thumbnail source={require('../asset/images/contact.png')} style={{width: 50,height: 50}}/>
+                    <Text style={{fontSize: 12, fontFamily: 'Source Sans Pro', color:'#282828', marginTop: 8}}>Phone Book</Text>
+                  </View>
+                </Button>
+                <Button style={styles.Btn01} small onPress={() => {  this.props.navigation.navigate('Contact'); }}>
+                  <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <Thumbnail source={require('../asset/images/icard.png')} style={{width: 50,height: 50}}/>
+                    <Text style={{fontSize: 12, fontFamily: 'Source Sans Pro', color:'#282828', marginTop: 8}}>iCard</Text>
                   </View>
                 </Button>
             </View>
@@ -163,11 +149,12 @@ const styles = StyleSheet.create({
   },
   Btn01: {
     backgroundColor: "rgb(255,255,255)",
-    width: '29%',
+    width: '25%',
     height: 100,
     justifyContent: 'center',
     borderRadius: 15,
-    marginLeft: 10,
+    marginLeft: 15,
+    marginRight: 10,
     //shadow for ios
     shadowOpacity: 0.7,
     shadowRadius: 5,
@@ -233,7 +220,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,1)',
   },
   services: {
-    
+    flexDirection: 'row'
   },
   boxs: {
     paddingTop: 12
