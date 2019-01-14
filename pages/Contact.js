@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Alert, AsyncStorage, StatusBar ,TouchableOpacity ,Dimensions ,Platform} from 'react-native';
+import { View, StyleSheet, Alert, AsyncStorage, StatusBar ,TouchableOpacity ,Dimensions ,Platform, Linking} from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title ,Input ,Item , Content, List, ListItem, Thumbnail, Text, rounded ,Spinner } from 'native-base';
 import Config from 'react-native-config'
 import Modal from "react-native-modal";
@@ -16,11 +16,16 @@ export default class Contact extends Component {
             loading: false,
             refreshing: false,
             isModalVisible: false,
+            currentPhoneNumber: ''
         };
     }
 
-    _toggleModal = () =>
-    this.setState({ isModalVisible: !this.state.isModalVisible });
+    _toggleModal = (phone) => {
+        this.setState({ 
+            isModalVisible: !this.state.isModalVisible,
+            currentPhoneNumber: phone
+        });
+    }
 
     componentWillMount() {
 
@@ -151,8 +156,8 @@ export default class Contact extends Component {
                                     >
                                     <Icon type="FontAwesome" name="phone" style={{fontSize: 22, color: 'green'}} />
                                 </Button> */}
-                                <TouchableOpacity onPress={this._toggleModal}>
-                                    <Icon type="FontAwesome" name="phone" style={{fontSize: 22, color: 'green'}} />
+                                <TouchableOpacity onPress={() => this._toggleModal(item.Phone3)}>
+                                    <Icon type="FontAwesome" name="phone" style={{fontSize: 22, color: '#20bf6b'}} />
                                 </TouchableOpacity>
                             </Right>
                             </ListItem>
@@ -162,16 +167,10 @@ export default class Contact extends Component {
             </List> 
     }
 
-    onClickCall = (Phone3) => {
-        Alert.alert(
-            'แจ้งเตือน',
-            'ต้องการโทรไปยังหมายเลข ' +Phone3+ ' หรือไม่',
-            [
-                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                {text: 'OK', onPress: () => console.log('OK Pressed')},
-            ],
-            { cancelable: false }
-        )
+    callJabber = (phone) => {
+        var phone = phone.slice(1);
+        phone = '+662089' + phone;
+        Linking.openURL('CISCOTEL://' + phone).catch(err => console.error('An error occurred', err));
     }
 
     render() {
@@ -228,7 +227,7 @@ export default class Contact extends Component {
                                 </TouchableOpacity> */}
                             </View>
                             <View style={[styles.modalinfo_footer]}>
-                                <Button style={styles.modalinfo_callbtn}>
+                                <Button style={styles.modalinfo_callbtn} onPress={() => {this.callJabber(this.state.currentPhoneNumber)}}>
                                     <Icon type="FontAwesome" name="phone" style={{fontSize: 22,margin:0}} />
                                     <Text style={{fontSize: 15,padding:0}}>Call</Text>
                                 </Button>
@@ -314,7 +313,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Sarabun',
         // color: '#656262', 
 
-        color: "#2b30db",
+        color: "#3867d6",
     },
 
     text2color: {
@@ -344,7 +343,7 @@ const styles = StyleSheet.create({
 
     modalinfo_callbtn: {
         width: "100%",
-        backgroundColor: "green",
+        backgroundColor: "#20bf6b",
         color: "#FFF",
         alignItems: "center",
         justifyContent: "center",
@@ -352,7 +351,7 @@ const styles = StyleSheet.create({
 
     modalinfo_cancelbtn: {
         width: "100%",
-        backgroundColor: "red",
+        backgroundColor: "#eb3b5a",
         color: "#FFF",
         alignItems: "center",
         justifyContent: "center",
