@@ -18,6 +18,7 @@ export default class Login extends Component {
   
   onLogin() {
     const { username, password } = this.state;
+
     if ( username.length === 0 && password.length === 0  ) {
 
       this.setState({
@@ -56,6 +57,11 @@ export default class Login extends Component {
         })
         .then((response) => response.json())
         .then((responseJson) => {
+          
+          console.log("responseJson",responseJson)
+          console.log("username", this.state.username)
+          console.log("password", this.state.password)
+          console.log("result",responseJson.result)
 
           if (responseJson.result) {
 
@@ -80,6 +86,9 @@ export default class Login extends Component {
             })  
 
           }else {
+
+
+            
             this.setState({
               alertMessage: 'Username หรือ Password ผิด'
             });

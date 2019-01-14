@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Alert, AsyncStorage, StatusBar } from 'react-native';
+import { View, StyleSheet, Alert, AsyncStorage, StatusBar ,TouchableOpacity ,Dimensions ,Platform} from 'react-native';
 import { Container, Header, Left, Body, Right, Button, Icon, Title ,Input ,Item , Content, List, ListItem, Thumbnail, Text, rounded ,Spinner } from 'native-base';
 import Config from 'react-native-config'
 import Modal from "react-native-modal";
@@ -141,7 +141,8 @@ export default class Contact extends Component {
                                 <Text style={[{ fontSize:14 },styles.text3color]}> {item.email} </Text>                            
                             </Body>
                             <Right style={{marginRight: 14,padding:0}} >
-                                <Button iconLeft transparent primary
+
+                                {/* <Button iconLeft transparent primary
                                     onPress={() => {
                                                 // this.onClickCall(item.Phone3)
                                                 this._toggleModal
@@ -149,7 +150,10 @@ export default class Contact extends Component {
                                         }
                                     >
                                     <Icon type="FontAwesome" name="phone" style={{fontSize: 22, color: 'green'}} />
-                                </Button>
+                                </Button> */}
+                                <TouchableOpacity onPress={this._toggleModal}>
+                                    <Icon type="FontAwesome" name="phone" style={{fontSize: 22, color: 'green'}} />
+                                </TouchableOpacity>
                             </Right>
                             </ListItem>
                         )
@@ -171,6 +175,11 @@ export default class Contact extends Component {
     }
 
     render() {
+
+        const deviceWidth = Dimensions.get("window").width;
+        const deviceHeight = Platform.OS === "ios" 
+        ? Dimensions.get("window").height
+        : require("react-native-extra-dimensions-android").get("REAL_WINDOW_HEIGHT");
 
         return (
             <Container>
@@ -205,7 +214,10 @@ export default class Contact extends Component {
                 </Content>
                 <View>
                     <Modal isVisible={this.state.isModalVisible}>
-                        <View style={{ flex: 1 }}>
+                        <View style={{ flex: 1 }}
+                            deviceWidth={deviceWidth}
+                            deviceHeight={deviceHeight}
+                        >
                             <Text>Hello!</Text>
                             <TouchableOpacity onPress={this._toggleModal}>
                                 <Text>Hide me!</Text>
