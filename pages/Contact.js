@@ -178,27 +178,14 @@ export default class Contact extends Component {
 
     callJabber = (phone) => {
         var phone = phone.slice(1);
-        phone = 'CISCOTEL:78451';
-        Alert.alert(phone)
-        Linking.openURL(phone).catch(err => console.error('An error occurred', err));
-    }
-    callJabber2 = (phone) => {
-        var phone = phone.slice(1);
-        phone = 'CISCOTEL:020898451';
-        Alert.alert(phone)
-        Linking.openURL(phone).catch(err => console.error('An error occurred', err));
-    }
-    callJabber3 = (phone) => {
-        var phone = phone.slice(1);
-        phone = 'CISCOTEL://+66020898451';
-        Alert.alert(phone)
-        Linking.openURL(phone).catch(err => console.error('An error occurred', err));
-    }
-    callJabber4 = (phone) => {
-        var phone = phone.slice(1);
-        phone = 'CISCOTEL:+66020898451';
-        Alert.alert(phone)
-        Linking.openURL(phone).catch(err => console.error('An error occurred', err));
+        phone = 'CISCOTEL:' + phone;
+        Linking.canOpenURL(phone).then(supported => {
+            if (supported) {
+                Linking.openURL(phone);
+            } else {
+                console.log("Don't know how to open URI: " + phone);
+            }
+        });
     }
 
     render() {
@@ -268,22 +255,9 @@ export default class Contact extends Component {
                                 </View>
                             </View>
                             <View style={[styles.modalinfo_footer]}>
-
                                 <Button style={styles.modalinfo_callbtn} onPress={() => {this.callJabber(this.state.currentPhoneNumber)}}>
                                     <Icon type="FontAwesome" name="phone" style={{fontSize: 22,margin:0}} />
                                     <Text style={{fontSize: 15,padding:0}}>Call</Text>
-                                </Button>
-                                <Button style={styles.modalinfo_callbtn} onPress={() => {this.callJabber2(this.state.currentPhoneNumber)}}>
-                                    <Icon type="FontAwesome" name="phone" style={{fontSize: 22,margin:0}} />
-                                    <Text style={{fontSize: 15,padding:0}}>Call2</Text>
-                                </Button>
-                                <Button style={styles.modalinfo_callbtn} onPress={() => {this.callJabber3(this.state.currentPhoneNumber)}}>
-                                    <Icon type="FontAwesome" name="phone" style={{fontSize: 22,margin:0}} />
-                                    <Text style={{fontSize: 15,padding:0}}>Call3</Text>
-                                </Button>
-                                <Button style={styles.modalinfo_callbtn} onPress={() => {this.callJabber4(this.state.currentPhoneNumber)}}>
-                                    <Icon type="FontAwesome" name="phone" style={{fontSize: 22,margin:0}} />
-                                    <Text style={{fontSize: 15,padding:0}}>Call4</Text>
                                 </Button>
                                 <Button style={styles.modalinfo_cancelbtn} onPress={() => {this._toggleModal('','','','','')}}>
                                     <Icon type="MaterialIcons" name="cancel" style={{fontSize: 22,margin:0}} />
@@ -393,7 +367,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFF",
         // borderWidth: 1,
         // borderColor: "#000",
-        borderRadius: 3,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20
     },
 
     modalinfo_callbtn: {
@@ -402,6 +377,7 @@ const styles = StyleSheet.create({
         color: "#FFF",
         alignItems: "center",
         justifyContent: "center",
+        borderRadius: 0
     },
 
     modalinfo_cancelbtn: {
@@ -410,6 +386,10 @@ const styles = StyleSheet.create({
         color: "#FFF",
         alignItems: "center",
         justifyContent: "center",
+        borderTopRightRadius: 0,
+        borderTopLeftRadius: 0,
+        borderBottomRightRadius: 20,
+        borderBottomLeftRadius: 20
     },
 
     modalinfo_footer: {
