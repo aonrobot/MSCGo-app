@@ -285,7 +285,6 @@ export default class Contact extends Component {
                                     <Icon type="FontAwesome" name="phone" style={{fontSize: 22,margin:0}} />
                                     <Text style={{fontSize: 15,padding:0}}>Call4</Text>
                                 </Button>
-
                                 <Button style={styles.modalinfo_cancelbtn} onPress={this._toggleModal('','','','','')}>
                                     <Icon type="MaterialIcons" name="cancel" style={{fontSize: 22,margin:0}} />
                                     <Text style={{fontSize: 15,padding:0}}>Cancel</Text>
@@ -418,7 +417,6 @@ const styles = StyleSheet.create({
     },
 
     modalinfo_imgbox_farme: {
-<<<<<<< HEAD
         flex: 4,
         alignItems: "center",
     },
@@ -427,15 +425,6 @@ const styles = StyleSheet.create({
         // borderRadius:200,
         borderWidth:6,
         borderColor: '#FFF',
-=======
-        flex: 1,
-        alignItems: "center"
-    },
-
-    modalinfo_imgbox: {
-        borderRadius:10,
-        borderColor: 'black',
->>>>>>> e3e35d0b4c990cffd08b241834922af9cb45b476
         backgroundColor: '#d6d7da',
         height:"100%",
         width:"50%",
