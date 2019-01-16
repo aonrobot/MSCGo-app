@@ -178,25 +178,25 @@ export default class Contact extends Component {
 
     callJabber = (phone) => {
         var phone = phone.slice(1);
-        phone = 'CISCOTEL://Work:78451';
+        phone = 'CISCOTEL:78451';
         Alert.alert(phone)
         Linking.openURL(phone).catch(err => console.error('An error occurred', err));
     }
     callJabber2 = (phone) => {
         var phone = phone.slice(1);
-        phone = 'CISCOTEL://78451@metrosystems.co.th';
+        phone = 'CISCOTEL:020898451';
         Alert.alert(phone)
         Linking.openURL(phone).catch(err => console.error('An error occurred', err));
     }
     callJabber3 = (phone) => {
         var phone = phone.slice(1);
-        phone = 'CISCOTEL://auttawir@metrosystems.co.th';
+        phone = 'CISCOTEL://+66020898451';
         Alert.alert(phone)
         Linking.openURL(phone).catch(err => console.error('An error occurred', err));
     }
     callJabber4 = (phone) => {
         var phone = phone.slice(1);
-        phone = 'CISCOTEL://Work:auttawir@metrosystems.co.th';
+        phone = 'CISCOTEL:+66020898451';
         Alert.alert(phone)
         Linking.openURL(phone).catch(err => console.error('An error occurred', err));
     }
@@ -285,7 +285,7 @@ export default class Contact extends Component {
                                     <Icon type="FontAwesome" name="phone" style={{fontSize: 22,margin:0}} />
                                     <Text style={{fontSize: 15,padding:0}}>Call4</Text>
                                 </Button>
-                                <Button style={styles.modalinfo_cancelbtn} onPress={this._toggleModal('','','','','')}>
+                                <Button style={styles.modalinfo_cancelbtn} onPress={() => {this._toggleModal('','','','','')}}>
                                     <Icon type="MaterialIcons" name="cancel" style={{fontSize: 22,margin:0}} />
                                     <Text style={{fontSize: 15,padding:0}}>Cancel</Text>
                                 </Button>
@@ -311,7 +311,8 @@ const styles = StyleSheet.create({
 
     iconheader: {
         // flex:1,
-        paddingTop:3,
+        fontSize: 20,
+        paddingTop:3
     },
 
     textheader: {
@@ -321,7 +322,7 @@ const styles = StyleSheet.create({
         fontSize: 23, 
         fontWeight: 'bold',
         marginLeft: 0,
-        marginLeft: 12,
+        marginLeft: 8,
         // marginLeft: -22,
 
         // flex:1,
