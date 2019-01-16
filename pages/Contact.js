@@ -178,7 +178,7 @@ export default class Contact extends Component {
 
     callJabber = (phone) => {
         var phone = phone.slice(1);
-        phone = 'CISCOTEL:' + phone;
+        phone = 'http://mis_test.metrosystems.co.th/mscgoapp/call/' + phone;
         Linking.canOpenURL(phone).then(supported => {
             if (supported) {
                 Linking.openURL(phone);
