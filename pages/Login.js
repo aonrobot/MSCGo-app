@@ -65,14 +65,16 @@ export default class Login extends Component {
 
           if (responseJson.result) {
 
-            AsyncStorage.setItem('UserInfo', JSON.stringify(responseJson.data));
+            AsyncStorage.setItem('@userInfo', JSON.stringify(responseJson.data));
+            AsyncStorage.setItem('@userLogin', JSON.stringify(responseJson.data.userInfo.Login));
+            AsyncStorage.setItem('@isLogin', 'true')
 
             const getUserToken = async () => {
 
               let userId = '';
 
               try {
-                userId = await AsyncStorage.getItem('UserInfo') || 'NoData';
+                userId = await AsyncStorage.getItem('@userInfo') || 'NoData';
               } catch (error) {
                 console.log(error.message);
               }
@@ -85,10 +87,10 @@ export default class Login extends Component {
         
             })  
 
-          }else {
-
-
-            
+          } else {
+            if (responseJson.result == false) {
+              alert(responseJson.message)
+            }
             this.setState({
               alertMessage: 'Username หรือ Password ผิด'
             });

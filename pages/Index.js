@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import { Alert, Platform, StyleSheet, View, ImageBackground,
         SafeAreaView, Image, AsyncStorage, StatusBar} from 'react-native';
 import { Container, Header, Title, Left, Right, Body, Button, Content, ActionSheet, Text, Icon, Thumbnail} from "native-base";
+
+import { NavigationEvents } from 'react-navigation';
+
 import Config from 'react-native-config'
 
 export default class Index extends Component {
@@ -14,12 +17,12 @@ export default class Index extends Component {
       };
   }
 
-  componentDidMount() {
+  getUser() {
     const getUserToken = async () => {
       
       let userId = '';
       try {
-        userId = await AsyncStorage.getItem('UserInfo') || 'NoData';
+        userId = await AsyncStorage.getItem('@userInfo') || 'NoData';
       } catch (error) {
         console.log(error.message);
       }
@@ -32,6 +35,7 @@ export default class Index extends Component {
         this.props.navigation.navigate('Login');
       } else {
         let userInfo = JSON.parse(token);
+        console.log('userInfo', userInfo)
         let firstName = userInfo.userInfo.FirstNameEng.toLowerCase();
         let lastName = userInfo.userInfo.LastNameEng.toLowerCase();
         userInfo.userInfo.FirstNameEng = firstName.charAt(0).toUpperCase() + firstName.slice(1);
@@ -40,7 +44,6 @@ export default class Index extends Component {
           userInfo: userInfo.userInfo
         })
       }
-
     })
   }
 
@@ -55,6 +58,9 @@ export default class Index extends Component {
     var lastName = this.state.userInfo.LastNameEng;
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: '#fefefe'}}>
+        <NavigationEvents
+            onWillFocus={() => this.getUser()}
+        />
         <StatusBar backgroundColor="#000" />
         <ImageBackground source={require('../asset/images/Phonebook-Header.jpg')} style={ { height: 100 } }>
           <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
@@ -84,7 +90,7 @@ export default class Index extends Component {
                     <Text style={{fontSize: 12, fontFamily: 'Source Sans Pro', color:'#282828', marginTop: 8}}>Phone Book</Text>
                   </View>
                 </Button>
-                <Button style={styles.Btn01} small onPress={() => {  this.props.navigation.navigate('Contact'); }}>
+                <Button style={styles.Btn01} small onPress={() => {  this.props.navigation.navigate('IcardHome'); }}>
                   <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     <Thumbnail source={require('../asset/images/icard.png')} style={{width: 50,height: 50}}/>
                     <Text style={{fontSize: 12, fontFamily: 'Source Sans Pro', color:'#282828', marginTop: 8}}>iCard</Text>

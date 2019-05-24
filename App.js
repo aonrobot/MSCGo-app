@@ -13,6 +13,13 @@ import LoginScreen from './pages/Login';
 import HomeScreen from './pages/Index';
 import ContactScreen from './pages/Contact';
 
+// iCard
+import IcardHomeScreen from './pages/icard/pages/MyCard';
+import IcardViewCardScreen from './pages/icard/pages/ViewCard';
+import IcardNewCardInfoScreen from './pages/icard/pages/NewCard/CardInfo';
+import IcardNewCardPreviewScreen from './pages/icard/pages/NewCard/ShowCard';
+import IcardProfileScreen from './pages/icard/pages/Profile';
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
@@ -34,6 +41,12 @@ const AppStackNavigator = createStackNavigator({
     Home: HomeScreen,
     Login : LoginScreen,
     Contact : ContactScreen,
+
+    IcardHome : IcardHomeScreen,
+    IcardViewCard : IcardViewCardScreen,
+    IcardNewCardInfo : IcardNewCardInfoScreen,
+    IcardNewCardPreview : IcardNewCardPreviewScreen,
+    IcardProfile: IcardProfileScreen
   },{
     headerMode: 'none'
   }

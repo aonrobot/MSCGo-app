@@ -41,7 +41,7 @@ export default class Contact extends Component {
         
             let userId = '';
             try {
-                userId = await AsyncStorage.getItem('UserInfo') || 'NoData';
+                userId = await AsyncStorage.getItem('@userInfo') || 'NoData';
             } catch (error) {
                 console.log(error.message);
             }
