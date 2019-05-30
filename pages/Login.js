@@ -54,9 +54,9 @@ export default class Login extends Component {
             login: username,
             password:  password,
           }),
-        })
-        .then((response) => response.json())
-        .then((responseJson) => {
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
           
           console.log("responseJson",responseJson)
           console.log("username", this.state.username)
@@ -95,9 +95,10 @@ export default class Login extends Component {
               alertMessage: 'Username หรือ Password ผิด'
             });
           }
-        })
-        .catch((error) => {
+      })
+      .catch((error) => {
         console.error(error);
+        alert(error)
       });
 
       this.setState({
