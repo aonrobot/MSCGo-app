@@ -30,7 +30,7 @@ export default class Index extends Component {
     }
 
     getUserToken().then((token) => {
-      // TODO Change Page 
+      // TODO: Change Page 
       if (token === 'NoData') { 
         this.props.navigation.navigate('Login');
       } else {
@@ -109,12 +109,6 @@ export default class Index extends Component {
             </View>
           </View>
         </View>
-
-        {/* <Button primary full onPress={()=> this.callNumber(`tel:+66838692401`)}>
-          <Icon name='ios-phone' style={styles.btnLogoutIcon}/>
-          <Text style={styles.btnLogoutLabel}>call</Text>
-        </Button> */}
-        {/* </ImageBackground> */}
       </SafeAreaView>
     );
   }
